@@ -12,6 +12,7 @@ bindings/
 echo-agent.yaml
 .echocowork/
 .echo-agent/
+*lock*
 
 # Worktree directories
 .worktrees/
