@@ -58,7 +58,7 @@ describe('chat and TaskRuntime lifecycle separation', () => {
     expect(useChatStore.getState().messages.at(-1)?.content).toContain('workspace_scope');
   });
 
-  it('surfaces the observed execution path', () => {
+  it('must never render execution-path diagnostics into the chat surface (ADR 0017)', () => {
     const context = {
       assistantIdRef: { current: null as string | null },
       currentMessageKeyRef: { current: null as string | null },
@@ -67,7 +67,7 @@ describe('chat and TaskRuntime lifecycle separation', () => {
       currentThinkingIdRef: { current: null as string | null },
     };
     handleChatEvent({ type: 'execution_path', observed_path: 'formal_plan' }, context);
-    expect(useChatStore.getState().messages.at(-1)?.content).toContain('formal_plan');
+    expect(useChatStore.getState().messages).toHaveLength(0);
   });
 
   it('projects reported LLM usage into the context indicator state', () => {

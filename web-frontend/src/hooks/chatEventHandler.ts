@@ -337,7 +337,9 @@ export function handleChatEvent(event: ChatEvent, ctx: EventContext): void {
       break;
     }
     case 'execution_path': {
-      store.appendLocalAssistantNote(`[Info] Execution path: ${event.observed_path}`);
+      // Routing diagnostic; already durable in TaskRuntime events.jsonl.
+      // The GUI chat surface must not render it as a chat message
+      // (ADR 0017 surface parity: renderers only decide presentation).
       break;
     }
     case 'interrupt_prompt': {
